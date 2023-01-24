@@ -54,3 +54,27 @@
 
 
 
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int minl,maxl,grp1,grp0;
+    cin>>minl>>maxl>>grp1>>grp0;
+    int mod = 1e9 + 7;
+    int res = 0;
+    int w = max(grp1, grp0) + 1;
+    vector<int> dp(w);
+    dp[0]=1;
+    for(int i=0;i<=maxl;i++) {
+        if(i>=minl) {
+            res=(res+dp[i%w])%mod;
+        }
+        if(i+grp1<=maxl){
+            dp[(i+grp1)%w]=(dp[(i+grp1)%w]+dp[i%w])%mod;
+        }
+        if(i+grp0<=maxl){
+            dp[(i+grp0)%w]=(dp[(i+grp0)%w]+dp[i%w])%mod;
+        }
+        dp[i%w]=0;
+    }
+    cout<<res;
+}
