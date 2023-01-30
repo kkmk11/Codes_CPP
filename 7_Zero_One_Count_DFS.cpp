@@ -39,10 +39,8 @@
 // Explanation: There is NO path that is having same number of 0's and 1's.
 
 
-
 #include<bits/stdc++.h>
 using namespace std;
-int flag=0;
 bool dfs(vector<vector<int>> &grid,int i,int j,int zero,int one){
     if(i>=0 && j>=0 && i<grid.size() && j<grid[0].size()){
         if(grid[i][j]==0){
@@ -70,8 +68,7 @@ int main(){
         }
     }
     int zero=0,one=0;
-    bool flag=dfs(grid,0,0,zero,one);
-    if(flag){
+    if(dfs(grid,0,0,zero,one)){
         cout<<"true";
     }
     else{
