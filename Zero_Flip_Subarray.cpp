@@ -59,8 +59,8 @@ int main(){
             }
             j++;
         }
+        res=max(res,i-j+1);
         i++;
-        res=max(res,i-j);
     }
     cout<<res;
 }
