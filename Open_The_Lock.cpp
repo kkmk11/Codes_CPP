@@ -59,21 +59,10 @@
 
 
 
-
 #include<bits/stdc++.h>
 using namespace std;
-int main(){
-    set<string> traps;
-    string s1;
-    getline(cin,s1);
-    stringstream x1(s1);
-    string t1;
-    while(getline(x1,t1,' ')){
-        traps.insert(t1);
-    }
-    string target;
-    cin>>target;
-    
+
+int solve(set<string> &traps,string target){
     set<string> visited;
     queue<string> q;
     if(traps.count("0000")==0){
@@ -81,8 +70,7 @@ int main(){
         visited.insert("0000");
     }
     else{
-        cout<<-1;
-        exit(0);
+        return -1;
     }
     int c=1;
     while(!q.empty()){
@@ -91,8 +79,7 @@ int main(){
             string s=q.front();
             q.pop();
             if(s==target){
-                cout<<c;
-                exit(0);
+                return c;
             }
             for(int i=0;i<4;i++){
                 string t1=s,t2=s;
@@ -109,8 +96,7 @@ int main(){
                     t2[i]=s[i]+1;
                 }
                 if(t1==target || t2==target){
-                    cout<<c;
-                    exit(0);
+                    return c;
                 }
                 if(traps.count(t1)==0 && visited.count(t1)==0){
                     visited.insert(t1);
@@ -124,5 +110,19 @@ int main(){
         }
         c++;
     }
-    cout<<-1;
+    return -1;
+}
+int main(){
+    set<string> traps;
+    string s1;
+    getline(cin,s1);
+    stringstream x1(s1);
+    string t1;
+    while(getline(x1,t1,' ')){
+        traps.insert(t1);
+    }
+    string target;
+    cin>>target;
+    
+    cout<<solve(traps,target);
 }
