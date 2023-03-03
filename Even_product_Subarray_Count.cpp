@@ -91,3 +91,24 @@ int main(){
     }
     cout<<c;
 }
+
+
+
+
+// soltuion2:
+// int getAns(vector<int> nums){
+//     int n = nums.size();
+//     int res = (n*(n+1))/2;
+//     int c=0;
+//     for(int i=0;i<n;i++){
+//         if(nums[i]%2!=0){
+//             c++;
+//         }
+//         else{
+//             res=res-(c*(c+1))/2;
+//             c=0;
+//         }
+//     }
+//     res=res-(c*(c+1))/2;
+//     return res;
+// }
