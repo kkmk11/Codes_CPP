@@ -75,7 +75,7 @@ int solve(set<string> &traps,string target){
     int c=1;
     while(!q.empty()){
         int k=q.size();
-        for(int i=0;i<k;i++){
+        for(int j=0;j<k;j++){
             string s=q.front();
             q.pop();
             if(s==target){
