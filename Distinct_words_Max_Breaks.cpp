@@ -45,36 +45,30 @@
 // NOTE: Subsequences are not allowed.
 
 
-
-
-
 #include<bits/stdc++.h>
 using namespace std;
 int res=1;
-void solve(string &s,vector<string> &v,set<string> &st,int ind){
+void solve(string &s,set<string> &st,int ind){
     if(ind==s.size()){
-        if(res<v.size()){
-            res=v.size();
+        if(res<st.size()){
+            res=st.size();
         }
         return;
     }
     string x="";
     for(int i=ind;i<s.size();i++){
         x=x+s[i];
-        if(st.count(x)==0){
-            v.push_back(x);
+        if(st.count(x)==0){           
             st.insert(x);
-            solve(s,v,st,i+1);
+            solve(s,st,i+1);
             st.erase(x);
-            v.pop_back();
         }
     }
 }
 int main(){
     string s;
     cin>>s;
-    vector<string> v;
     set<string> st;
-    solve(s,v,st,0);
+    solve(s,st,0);
     cout<<res;
 }
