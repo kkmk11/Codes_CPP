@@ -74,8 +74,9 @@ using namespace std;
 int main(){
     int n;
     cin>>n;
+    cin.ignore();
     vector<vector<string>> v;
-    for(int i=0;i<n+1;i++){
+    for(int i=0;i<n;i++){
         vector<string> p;
         string s1;
         getline(cin,s1);
@@ -86,7 +87,6 @@ int main(){
         }
         v.push_back(p);
     }
-    v.erase(v.begin());
     set<string> res;
     for(int i=0;i<v.size();i++){
         for(int j=0;j<v.size();j++){
@@ -100,7 +100,7 @@ int main(){
                     for(int k=1;k<b.size();k++){
                         s=s+b[k]+" ";
                     }
-                    // s.pop_back();
+                    s.pop_back();
                     res.insert(s);
                 }
             }
