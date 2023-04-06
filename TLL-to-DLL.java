@@ -54,7 +54,6 @@
 
 
 
-
 /*
 //Structure of the node in Triply Linked List(TLL)
 
@@ -74,13 +73,13 @@ class Solution{
         }
         Stack<Node> st=new Stack<>();
         st.push(head);
-        Node left=new Node();
+        Node nn=new Node();
         while(!st.isEmpty()){
             Node temp=st.pop();
-            left.right=temp;
-            temp.left=left;
-            left.down=null;
-            left=temp;
+            nn.right=temp;
+            temp.left=nn;
+            nn.down=null;
+            nn=temp;
             if(temp.right!=null){
                 st.push(temp.right);
             }
@@ -88,7 +87,7 @@ class Solution{
                 st.push(temp.down);
             }
         }
-        head.left=null;
+        nn.left=null;
         return head;
     }
 }
