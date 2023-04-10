@@ -49,7 +49,41 @@
 
 
 
+Solution 1:   //using Priority_Queue
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,k;
+    cin>>n>>k;
+    priority_queue<int> q;
+    for(int i=0;i<n;i++){
+        int x;
+        cin>>x;
+        q.push(x);
+    }
+    while(k>0){
+        int x=q.top();
+        q.pop();
+        if(x%2!=0){
+            q.push(x/2+1);
+        }
+        else{
+            q.push(x/2);
+        }
+        k--;
+        
+    }
+    int sum=0;
+    while(!q.empty()){
+        sum=sum+q.top();
+        q.pop();
+    }
+    cout<<sum;
+}
 
+......................................................
+
+Solution 2: //Using Vector
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
