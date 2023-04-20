@@ -32,7 +32,7 @@
 
 
 
-
+Solution 1: 
 #include<bits/stdc++.h>
 using namespace std;
 vector<int> v;
@@ -93,4 +93,58 @@ int main(){
         }
     }
     cout<<maxi;
+}
+
+
+
+solution 2:
+import java.util.*;
+class j{
+    static int ans=0;
+    static int hor(int i,int j,int n,int m,int[][] a){
+        if(i<0 || j<0 || i>=n || j>=m || a[i][j]==0){
+            return 0;
+        }
+        return 1+hor(i,j+1,n,m,a);
+    }
+    static int ver(int i,int j,int n,int m,int[][] a){
+        if(i<0 || j<0 || i>=n || j>=m || a[i][j]==0){
+            return 0;
+        }
+        return 1+ver(i+1,j,n,m,a);
+    }
+    static int dia(int i,int j,int n,int m,int[][] a){
+        if(i<0 || j<0 || i>=n || j>=m || a[i][j]==0){
+            return 0;
+        }
+        return 1+dia(i+1,j+1,n,m,a);
+    }
+    static int anti(int i,int j,int n,int m,int[][] a){
+        if(i<0 || j<0 || i>=n || j>=m || a[i][j]==0){
+            return 0;
+        }
+        return 1+anti(i-1,j+1,n,m,a);
+    }
+    public static void main (String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int m=sc.nextInt();
+        int[][] a=new int[n][m];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                a[i][j]=sc.nextInt();
+            }
+        }
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(a[i][j]==1){
+                    ans=Math.max(ans,hor(i,j,n,m,a));
+                    ans=Math.max(ans,ver(i,j,n,m,a));
+                    ans=Math.max(ans,dia(i,j,n,m,a));
+                    ans=Math.max(ans,anti(i,j,n,m,a));
+                }
+            }
+        }
+        System.out.println(ans);
+    }
 }
