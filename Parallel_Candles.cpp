@@ -65,7 +65,6 @@
 
 
 
-
 #include<bits/stdc++.h>
 using namespace std;
 int mini=INT_MAX;
@@ -78,13 +77,9 @@ void solve(vector<int> &a,vector<int> &b,int ind,int c){
         solve(a,b,ind+1,c);
     }
     if(a[ind]<a[ind-1] || b[ind]<b[ind-1] || (a[ind-1]<b[ind] && b[ind-1]<a[ind])){
-        int a1=a[ind];
-        int b1=b[ind];
-        a[ind]=b1;
-        b[ind]=a1;
+        swap(a[ind],b[ind]);
         solve(a,b,ind+1,c+1);
-        a[ind]=a1;
-        b[ind]=b1;
+        swap(a[ind],b[ind]);
     }
 }
 int main(){
@@ -98,10 +93,7 @@ int main(){
         cin>>b[i];
     }
     solve(a,b,1,0);
-    int a1=a[0];
-    int b1=b[0];
-    a[0]=b1;
-    b[0]=a1;
+    swap(a[0],b[0]);
     solve(a,b,1,1);
     cout<<mini;
 }
