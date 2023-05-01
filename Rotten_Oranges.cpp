@@ -105,7 +105,7 @@ int main(){
         }
     }
     if(k==0){
-        cout<<0;
+        cout<<-1;
         exit(0);
     }
     int c=0;
