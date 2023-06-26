@@ -66,16 +66,15 @@ int main(){
     }
     sort(nums.begin(),nums.end());
     int c=1;
-    int x=nums[0][1];
+    int end=nums[0][1];
     for(int i=1;i<nums.size();i++){
-        if(nums[i][0]>x){
-            x=nums[i][1];
+        if(nums[i][0]>end){
+            end=nums[i][1];
             c++;
         }
         else{
-            x=min(x,nums[i][1]);
+            end=min(end,nums[i][1]);
         }
     }
     cout<<c;
-}
 }
