@@ -53,7 +53,6 @@
 
 
 
-
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
@@ -68,7 +67,7 @@ int main(){
     sort(nums.begin(),nums.end());
     int c=1;
     int x=nums[0][1];
-    for(int i=0;i<nums.size();i++){
+    for(int i=1;i<nums.size();i++){
         if(nums[i][0]>x){
             x=nums[i][1];
             c++;
@@ -78,4 +77,5 @@ int main(){
         }
     }
     cout<<c;
+}
 }
