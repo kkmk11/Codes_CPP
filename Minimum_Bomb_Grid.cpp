@@ -78,21 +78,21 @@ int main(){
     }
     for(int i=1;i<n;i++){
         for(int j=0;j<n;j++){
-            int a,b,c;
+            int left,right,middle;
             if(j>0){
-                a=dp[i-1][j-1];
+                left=dp[i-1][j-1];
             }
             else{
-                a=INT_MAX;
+                left=INT_MAX;
             }
+            middle=dp[i-1][j];
             if(j<n-1){
-                c=dp[i-1][j+1];
+                right=dp[i-1][j+1];
             }
             else{
-                c=INT_MAX;
+                right=INT_MAX;
             }
-            b=dp[i-1][j];
-            dp[i][j]=nums[i][j]+min(a,min(b,c));
+            dp[i][j]=nums[i][j]+min(left,min(middle,right));
         }
     }
     int mini=INT_MAX;
