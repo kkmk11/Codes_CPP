@@ -43,7 +43,6 @@
 
 
 
-
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
@@ -53,39 +52,53 @@ int main(){
     for(int i=0;i<n;i++){
         cin>>nums[i];
     }
-    for(int i=0;i<n;i++){
-        int l=i,r=i;
-        int sum=0;
-        while(l>=0 && r<nums.size()){
-            if(l==r){
-                sum=sum+nums[l];
-            }
-            else{
-                sum=sum+nums[l]+nums[r];
-            }
-            if(sum%w==0 && (r-l+1)>=2){
+    // for(int i=0;i<n;i++){
+    //     int l=i,r=i;
+    //     int sum=0;
+    //     while(l>=0 && r<nums.size()){
+    //         if(l==r){
+    //             sum=sum+nums[l];
+    //         }
+    //         else{
+    //             sum=sum+nums[l]+nums[r];
+    //         }
+    //         if(sum%w==0 && (r-l+1)>=2){
+    //             cout<<"true";
+    //             exit(0);
+    //         }
+    //         l--;
+    //         r++;
+    //     }
+    //     l=i,r=i+1;
+    //     sum=0;
+    //     while(l>=0 && r<nums.size()){
+    //         if(l==r){
+    //             sum=sum+nums[l];
+    //         }
+    //         else{
+    //             sum=sum+nums[l]+nums[r];
+    //         }
+    //         if(sum%w==0&& (r-l+1)>=2){
+    //             cout<<"true";
+    //             exit(0);
+    //         }
+    //         l--;
+    //         r++;
+    //     }
+    // }
+    // cout<<"false";
+    unordered_map<int,int> m;
+    int x=0;
+    for(int i=0;i<nums.size();i++){
+        x=x+nums[i];
+        x=x%w;
+        if(m.find(x)!=m.end()){
+            if(i-m[x]>=2){
                 cout<<"true";
                 exit(0);
             }
-            l--;
-            r++;
         }
-        l=i,r=i+1;
-        sum=0;
-        while(l>=0 && r<nums.size()){
-            if(l==r){
-                sum=sum+nums[l];
-            }
-            else{
-                sum=sum+nums[l]+nums[r];
-            }
-            if(sum%w==0&& (r-l+1)>=2){
-                cout<<"true";
-                exit(0);
-            }
-            l--;
-            r++;
-        }
+        m[x]=i;
     }
     cout<<"false";
 }
