@@ -60,8 +60,10 @@ int main(){
     for(int i=1;i<dp.size();i++){
         dp[i]=dp[i-1]+1;
         if(i>=2){
-            for(int j=2;j<=i;j++){
-                dp[i]=max(dp[i],dp[i-j]*(j-1));
+            int k=0;
+            for(int j=i-1;j>=2;j--){
+                dp[i]=max(dp[i],dp[j]*(k));
+                k++;
             }
         }
     }
