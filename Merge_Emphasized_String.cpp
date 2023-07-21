@@ -42,12 +42,12 @@
 // <i>qwertykeypad</i>
 
 
-// Sample Input-2:
+// Sample Input-3:
 // ---------------
 //aaaabbbbbcccccccdddddddeeeeeeeefffffffffffff
 // aaa ab bbc ccc cdd dee eff fff
 
-// Sample Output-2:
+// Sample Output-3:
 // ----------------
 // output =<i>aaaab</i>bb<i>bbcccccccdd</i>dddd<i>dee</i>eeeee<i>efffffffffffff</i>
 
@@ -101,14 +101,16 @@ int main(){
     
     //merging intervals
     vector<vector<int>> arr;
-    arr.push_back(nums[0]);
-    for(int i=1;i<nums.size();i++){
-        if(nums[i][0]-arr.back()[1]<=1){
-            arr.back()[0]=min(arr.back()[0],nums[i][0]);
-            arr.back()[1]=max(arr.back()[1],nums[i][1]);
-        }
-        else{
-            arr.push_back(nums[i]);
+    if(nums.size()!=0){
+        arr.push_back(nums[0]);
+        for(int i=1;i<nums.size();i++){
+            if(nums[i][0]-arr.back()[1]<=1){
+                arr.back()[0]=min(arr.back()[0],nums[i][0]);
+                arr.back()[1]=max(arr.back()[1],nums[i][1]);
+            }
+            else{
+                arr.push_back(nums[i]);
+            }
         }
     }
     
