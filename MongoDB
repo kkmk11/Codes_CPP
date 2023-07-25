@@ -1,0 +1,316 @@
+/* 
+Write a MongoDB query to 
+find all the  students who live in San Diego, California learning python,javascript.
+from the collection "studentinfo".
+
+Sample Document:
+----------------
+{
+    _id: ObjectId("62f297b277bede1ebe79f598"),
+    name: 'Benjamin',
+    gender: 'Male',
+    courses: [ 'python', 'react' ],
+    address: { city: 'Los Angeles', state: 'California' },
+    python: 88,
+    react: 78
+  }
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => database connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(db.studentinfo.find({$and:[{address:{city:'San Diego', state:'California'}},{courses:['python','javascript']}]}))
+
+
+
+
+
+..............................
+
+/* 
+Write a MongoDB query to display all the details of student from studentinfo
+collection whose city is "Los Angeles" and state is "California".
+
+Sample Document:
+----------------
+{
+    _id: ObjectId("62f297b277bede1ebe79f598"),
+    name: 'Benjamin',
+    gender: 'Male',
+    courses: [ 'python', 'react' ],
+    address: { city: 'Los Angeles', state: 'California' },
+    python: 88,
+    react: 78
+  }
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => database connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(db.studentinfo.find({address:{city:'Los Angeles',state:'California'}}));
+
+
+......................
+
+/* 
+Write a MongoDB query to 
+display the student details those who have taken python and javascript courses.
+from the collection "studentinfo".
+
+Sample Document:
+----------------
+{
+    _id: ObjectId("62f297b277bede1ebe79f598"),
+    name: 'Benjamin',
+    gender: 'Male',
+    courses: [ 'python', 'react' ],
+    address: { city: 'Los Angeles', state: 'California' },
+    python: 88,
+    react: 78
+  }
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => database connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.studentinfo.find(
+        {$and:[
+            {courses:{$in:['python']}},
+            {courses:{$in:['javascript']}}
+        ]}    
+    )
+);
+
+
+..................
+
+/* 
+Write a MongoDB query to 
+display the student details who have secured 80 marks in any course, [python, javascript, react]
+from the collection "studentinfo".
+
+Sample Document:
+----------------
+{
+    _id: ObjectId("62f297b277bede1ebe79f598"),
+    name: 'Benjamin',
+    gender: 'Male',
+    courses: [ 'python', 'react' ],
+    address: { city: 'Los Angeles', state: 'California' },
+    python: 88,
+    react: 78
+  }
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => database connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.studentinfo.find(
+        {$or:[
+            {"python":{$gte:80}},
+            {"javascript":{$gte:80}},
+            {"react":{$gte:80}},
+            ]
+        }    
+    )    
+)
+
+
+.......................
+/* 
+Write a MongoDB query to 
+display the student names whose names starts ith either 'b' or 'o' and ends with either 'n' or 'r'.
+from the collection "studentinfo".
+
+Sample Document:
+----------------
+{
+    _id: ObjectId("62f297b277bede1ebe79f598"),
+    name: 'Benjamin',
+    gender: 'Male',
+    courses: [ 'python', 'react' ],
+    address: { city: 'Los Angeles', state: 'California' },
+    python: 88,
+    react: 78
+  }
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => database connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.studentinfo.find(
+        {
+            name:{$regex:"^[BO].*[nr]$"}
+        },
+        {name:1,_id:0}
+    )
+)
+
+
+.........................
+/* 
+Write a MongoDB query 
+to find the total number of employees in each department
+from the collection "employees"
+
+Sample Document:
+----------------
+{
+    empno: 277,
+    name: 'Anuj Chettiar',
+    age: 31,
+    gender: 'Male',
+    department: 'Product Development',
+    year: 2012,
+    salary: 35700
+}
+
+Sample Output:
+--------------
+[                                                                                                                       
+  { _id: 'Account And Finance', count: 2 },
+  { _id: 'Security And Transport', count: 2 },
+  .......
+  .......
+]                                                                                                                       
+
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collection name
+    find => method to retrieve all the matched documents
+
+*/
+printjson(
+    db.employees.aggregate([
+        {
+            $group:{
+                _id:"$department",
+                count:{$sum:1} //increment by 1
+            }
+        }
+    ])
+)
+
+........................
+/* Write a MongoDB query 
+to find the max salary in the company from the collection "employees"
+
+Sample Document:
+----------------
+{
+    empno: 277,
+    name: 'Anuj Chettiar',
+    age: 31,
+    gender: 'Male',
+    department: 'Product Development',
+    year: 2012,
+    salary: 35700
+}
+
+Sample Output:
+--------------
+[ { _id: null, sal: 35700 } ]                                                                                                                     
+
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collection name
+    find => method to retrieve all the matched documents
+
+*/
+printjson(
+    db.employees.aggregate([
+        {
+            $group:{
+                _id:null,
+                sal:{$max:"$salary"}
+            }
+        }
+    ])
+)
+
+........................
+/* Write a MongoDB query 
+to print the top 3 combined department salaries
+from the collection "employees"
+
+Sample Document:
+----------------
+{
+    empno: 277,
+    name: 'Anuj Chettiar',
+    age: 31,
+    gender: 'Male',
+    department: 'Product Development',
+    year: 2012,
+    salary: 35700
+}
+
+Sample Output:
+--------------
+[                                                                                                                       
+  { _id: 'Product Development', totalsalary: 192300 },                                                                  
+  { _id: 'Infrastructure', totalsalary: 64400 },                                                                        
+  { _id: 'Account And Finance', totalsalary: 48300 }                                                                    
+]                                                                                                                      
+
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the documents from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collection name
+    find => method to retrieve all the matched documents
+
+*/
+printjson(
+    db.employees.aggregate([
+        {
+            $group:{
+                _id:"$department",
+                totalsalary:{$sum:"$salary"},
+            }
+        },
+        {$sort:{totalsalary:-1}},// 1 means asc and 1 means desc
+        {$limit:3}
+    ])    
+)
+
+
+............................
