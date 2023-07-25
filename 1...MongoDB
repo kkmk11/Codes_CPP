@@ -553,7 +553,7 @@ printjson(
         {
             date:{
                 $gte:ISODate("2021-01-12T00:00:00Z"),
-                $lt:ISODate("2021-01-14T00:00:00Z"),
+                $lt:ISODate("2021-01-13T23:59:59.999Z"),
             }
         }    
     )    
@@ -561,3 +561,78 @@ printjson(
 
 
 .....................................
+/* 
+Write a Mongodb query
+to get and display all the orders on 2022-01-12 between 2pm to 10pm.
+from the collection "orders"
+
+Sample Document:
+----------------
+{
+    _id: 0,
+    name: 'Pepperoni',
+    size: 'small',
+    price: 19,
+    quantity: 10,
+    date: ISODate("2021-03-13T08:14:30.000Z")
+}
+
+
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the douments from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.orders.find(
+        {
+            date:{
+                $gte:ISODate("2022-01-12T14:00:00Z"),
+                $lte:ISODate("2022-01-12T22:00:00Z")
+            }
+        }
+    )    
+)
+
+...........................
+/* 
+Write a Mongodb query
+to display all the orders recieved in January
+from the collection "orders"
+
+Sample Document:
+----------------
+{
+    _id: 0,
+    name: 'Pepperoni',
+    size: 'small',
+    price: 19,
+    quantity: 10,
+    date: ISODate("2021-03-13T08:14:30.000Z")
+}
+
+
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the douments from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.orders.find(
+        {
+            $expr:{
+                $eq:[{$month:"$date"},1]
+            }
+        }    
+    )    
+)
