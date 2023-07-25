@@ -314,3 +314,169 @@ printjson(
 
 
 ............................
+
+/* Write a MongoDB query 
+to find the total salary of the employees in each department 
+from the collection "employees"
+
+Sample Document:
+----------------
+{
+    empno: 277,
+    name: 'Anuj Chettiar',
+    age: 31,
+    gender: 'Male',
+    department: 'Product Development',
+    year: 2012,
+    salary: 35700
+}
+
+Sample Output:
+--------------
+[                                                                                                                       
+  { _id: 'Account And Finance', 'total salary': 48300 },                                                                
+  { _id: 'Security And Transport', 'total salary': 21500 },                                                             
+  ..............
+  ..............
+]                                                                                                               
+
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the douments from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.employees.aggregate([
+        {
+            $group:{
+                _id:"$department",
+                "total salary":{$sum:"$salary"}
+            }
+        },    
+    ])    
+)
+
+.................................
+/* 
+Write a Mongodb query using aggregation pipeline 
+to print the number of joined in distinct years
+from the collection "employees"
+
+Sample Document:
+----------------
+{
+    empno: 277,
+    name: 'Anuj Chettiar',
+    age: 31,
+    gender: 'Male',
+    department: 'Product Development',
+    year: 2012,
+    salary: 35700
+}
+
+Sample Output:
+--------------
+[                                                                                                                       
+  { year: 2018, number_of_employee: 1 },                                                                                 
+  { year: 2017, number_of_employee: 1 },                                                                                 
+  { year: 2010, number_of_employee: 1 },                                                                                 
+...
+...
+]  
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the douments from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.employees.aggregate([
+        {
+            $group:{
+                _id:"$year",
+                number_of_employee:{$sum:1},
+            }
+        },
+        {
+            $project:{
+                _id:0,
+                "year":"$_id",
+                "number_of_employee":"$number_of_employee"
+            }
+        }
+    ])    
+)
+
+..............................
+
+/* 
+Write a Mongodb query
+to find the max and min salary department wise
+and display them in the sorted order of department name
+from the collection "employees"
+
+Sample Document:
+----------------
+{
+    empno: 277,
+    name: 'Anuj Chettiar',
+    age: 31,
+    gender: 'Male',
+    department: 'Product Development',
+    year: 2012,
+    salary: 35700
+}
+
+Sample Output:
+--------------
+[                                                                                                                       
+  { department: 'Account And Finance', max: 27000, min: 21300 },    
+....
+....
+  { department: 'Security And Transport', max: 11000, min: 10500 },                                                            
+
+]
+
+Note: To write the query, use printjson() method from 'mongosh' module
+    e.g., To display all the douments from 'marks' collection
+        => printjson( db.marks.find())
+    Where,
+    db => databse connection object
+    marks => collections name
+    find => method to retrieve all the matched docuemnts
+
+*/
+printjson(
+    db.employees.aggregate([
+        {
+            $group:{
+                _id:"$department",
+                max:{$max:"$salary"},
+                min:{$min:"$salary"},
+            }
+        },
+        {
+            $sort:{
+                _id:1
+            }
+        },
+        {
+            $project:{
+                department:"$_id",
+                _id:0,
+                max:"$max",
+                min:"$min",
+            }
+        }
+    ])    
+)
+
+.............................
