@@ -1,9 +1,9 @@
-// Given a string of characters("<" or ">" or "?") where we have "?" which can be replace "?" as  per our convience
+// Given a string of characters("<" or ">" or "?") where we have "?" which can be replaced as ">" or "< as  per our convience
 // which should form a longest symmetric substring from the given string.
 
 // Note: Symmetric substring are like : "<<<>>>" , "<<>>" ,"<>" etc
 
-// noew return the length of the longest symmetric substring taht can be obtained after replacing "?" with "<" or ">"
+// now return the length of the longest symmetric substring that can be obtained after replacing "?" with "<" or ">"
 
 // example 1:
 // s="<><??>>"
