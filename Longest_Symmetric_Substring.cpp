@@ -1,4 +1,4 @@
-// Given a string of characters("<" or ">" or "?") where we have "?" which can be replaced as ">" or "<" as  per our convience
+// Given a string of characters("<" or ">" or "?") where we have "?" which can be replaced by ">" or "<" as  per our convience,
 // which should form a longest symmetric substring from the given string.
 
 // Note: Symmetric substring are like : "<<<>>>" , "<<>>" ,"<>" etc
